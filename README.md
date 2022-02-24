@@ -1,7 +1,12 @@
-# js快速复制方法
+# js 进入/退出全屏
 
 
 ```
-import copy from '@iamgx/easy-copy'
-copy('哈哈哈123');
+import { request, exit } from '@iamgx/fullscreen'
+// 进入全屏
+request()
+
+// 退出全屏
+
+exit()
 ```

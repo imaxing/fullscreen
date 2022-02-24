@@ -1,25 +1,31 @@
-export default function (content) {
-  if (!content) return;
-
-  let eleTextarea = document.querySelector("#tempTextarea");
-  if (!eleTextarea && !navigator.clipboard) {
-    eleTextarea = document.createElement("textarea");
-    eleTextarea.style.width = 0;
-    eleTextarea.style.position = "fixed";
-    eleTextarea.style.left = "-999px";
-    eleTextarea.style.top = "10px";
-    document.body.appendChild(eleTextarea);
-  }
-
-  const funCopy = function (text) {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(text);
+export default {
+  state: false,
+  toggle() {
+    this.state = !this.state;
+    this.state ? this.request() : this.exit();
+  },
+  request() {
+    if (document.documentElement.requestFullScreen) {
+      document.documentElement.requestFullScreen();
+    } else if (document.documentElement.webkitRequestFullScreen) {
+      document.documentElement.webkitRequestFullScreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+      document.documentElement.mozRequestFullScreen();
     } else {
-      eleTextarea.value = text;
-      eleTextarea.select();
-      document.execCommand("copy", true);
+      console.warn("进入全屏失败");
     }
-  };
-
-  funCopy(content);
-}
+    return this.state;
+  },
+  exit() {
+    if (document.documentElement.requestFullScreen) {
+      document.exitFullScreen();
+    } else if (document.documentElement.webkitRequestFullScreen) {
+      document.webkitCancelFullScreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+      document.mozCancelFullScreen();
+    } else {
+      console.warn("退出全屏失败");
+    }
+    return this.state;
+  },
+};

@@ -1,8 +1,8 @@
 {
-  "name": "@iamgx/easy-copy",
+  "name": "@iamgx/fullscreen",
   "version": "1.0.0",
   "author": "GeXing",
-  "description": "复制内容",
+  "description": "全屏操作",
   "main": "src/index.js",
   "module": "src/index.js",
   "scripts": {

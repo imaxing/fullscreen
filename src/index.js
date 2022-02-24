@@ -1,8 +1,8 @@
-export default {
+const Fullscreen = {
   state: false,
   toggle() {
-    this.state = !this.state;
-    this.state ? this.request() : this.exit();
+    Fullscreen.state = !Fullscreen.state;
+    Fullscreen.state ? Fullscreen.request() : Fullscreen.exit();
   },
   request() {
     if (document.documentElement.requestFullScreen) {
@@ -14,7 +14,7 @@ export default {
     } else {
       console.warn("进入全屏失败");
     }
-    return this.state;
+    return Fullscreen.state;
   },
   exit() {
     if (document.documentElement.requestFullScreen) {
@@ -26,6 +26,8 @@ export default {
     } else {
       console.warn("退出全屏失败");
     }
-    return this.state;
+    return Fullscreen.state;
   },
 };
+
+export default Fullscreen;
